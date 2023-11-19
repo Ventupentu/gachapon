@@ -1,0 +1,181 @@
+/* Estilo general del juego */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  transition: background-color 0.5s ease;
+}
+
+.game-container {
+  text-align: center;
+  padding: 20px;
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.header h1 {
+  color: #2980b9;
+  transition: color 0.5s ease;
+}
+
+.header h1:hover {
+  color: #3498db;
+}
+/* Estilo de la galleta y la puntuación */
+.cookie img {
+  width: 200px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.cookie img:hover {
+  transform: scale(1.1);
+}
+
+.score p {
+  margin: 10px 0;
+  transition: color 0.5s ease;
+}
+
+.score p:hover {
+  color: #3498db;
+}
+
+/* Estilo de la colección de zorritas */
+.collection {
+  margin-top: 20px;
+  transition: margin-top 0.5s ease;
+}
+
+.collection h2 {
+  color: #2980b9;
+  transition: color 0.5s ease;
+}
+
+.collection h2:hover {
+  color: #3498db;
+}
+/* Estilo de las cajas Gacha */
+.gacha-section {
+  margin-top: 20px;
+}
+
+.gacha-section h2 {
+  color: #2980b9;
+}
+
+#comprar-caja {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#comprar-caja:hover {
+  background-color: #2980b9;
+}
+
+/* Estilo de los elementos desbloqueados */
+.elemento-desbloqueado {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.elemento-desbloqueado img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #2980b9;
+  border-radius: 5px;
+}
+
+.elemento-desbloqueado p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* Añade estas reglas al final de tu archivo de estilos */
+
+/* Estilo de la colección de zorritas */
+.collection {
+  margin-top: 20px;
+  display: flex; /* Añadido para alinear los elementos de la colección */
+  flex-wrap: wrap; /* Añadido para permitir que los elementos se envuelvan en varias líneas */
+  justify-content: center; /* Centra los elementos en la colección */
+}
+
+.collection .collectible {
+  margin: 10px;
+  text-align: center;
+}
+
+.collection .collectible img {
+  width: 100px; /* Ajusta el tamaño deseado */
+  height: 100px; /* Ajusta el tamaño deseado */
+  object-fit: cover;
+  border: 2px solid #2980b9;
+  border-radius: 5px;
+  margin-bottom: 5px; /* Espacio entre la imagen y la cantidad */
+}
+
+.collection .collectible p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+.elementos-desbloqueados {
+  display: flex; /* Hace que los elementos se alineen horizontalmente */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente línea si no hay suficiente espacio */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  gap: 10px; /* Añade un espacio entre los elementos */
+}
+
+.elementos-desbloqueados div {
+  border: 1px solid #2980b9; /* Cambia el color del borde para que coincida con el resto de la página */
+  width: 100px; /* Establece un ancho fijo para el recuadro */
+  height: 100px; /* Establece una altura fija para el recuadro */
+  border-radius: 5px; /* Añade bordes redondeados al recuadro */
+}
+
+.elementos-desbloqueados div img {
+  width: 100%; /* Hace que la imagen ocupe todo el ancho del recuadro */
+  height: 100%; /* Hace que la imagen ocupe toda la altura del recuadro */
+  object-fit: cover; /* Asegura que la imagen cubra todo el recuadro */
+  border-radius: 5px; /* Añade bordes redondeados a la imagen */
+}
+
+.elementos-desbloqueados div p {
+  text-align: center; /* Centra el texto */
+  font-size: 12px; /* Ajusta el tamaño de la fuente */
+  margin: 5px 0; /* Añade un espacio arriba y abajo del texto */
+}
+
+.descripcion-item {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 200px; /* Ajusta según sea necesario */
+  padding: 20px;
+  background-color: #f8f9fa; /* Ajusta según sea necesario */
+  border-left: 1px solid #ced4da; /* Ajusta según sea necesario */
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1); /* Ajusta según sea necesario */
+  text-align: center;
+}
+
+.descripcion-item h2 {
+  color: #2980b9;
+  transition: color 0.5s ease;
+}
+
+.descripcion-item p {
+  color: #6c757d; /* Ajusta según sea necesario */
+}

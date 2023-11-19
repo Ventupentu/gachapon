@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="estilos.css">
+  <title>Tu Juego Cookie Clicker</title>
+</head>
+<body>
+  <div class="game-container">
+    <div class="header">
+      <h1>Tu Juego Cookie Clicker</h1>
+    </div>
+    <div class="cookie" id="cookie">
+      <img src="FotoTomás.png" alt="Galleta" onclick="clicarGalleta()">
+    </div>
+    <div class="score">
+      <p>Putipuntos:</p>
+      <span id="puntos">0</span>
+    </div>
+    <div class="collection">
+      <h2>Colección de zorritas:</h2>
+      <!-- Aquí puedes listar los elementos de la colección -->
+    </div>
+  </div>
+  <div class="gacha-section">
+    <h2>Cajas Gacha (Costo: 100 puntos)</h2>
+    <button id="comprar-caja" onclick="comprarCajaGacha()">Comprar Caja Gacha</button>
+    <div class="elementos-desbloqueados">
+      <!-- Aquí se mostrarán los elementos desbloqueados -->
+    </div>
+  </div>
+  <div class="descripcion-item">
+    <h2>Descripción del Último Item Desbloqueado </h2>
+    <p id="descripcion"></p>
+  </div>
+
+  <script>
+    // Variables para llevar el registro de la puntuación y los elementos desbloqueados
+    let puntos = 0;
+    let elementosDesbloqueados = {};
+
+    // Evento al hacer clic en la galleta
+    function clicarGalleta() {
+      let puntosIncrementados = 1; // Incremento base de puntos
+
+      // Verifica los efectos de los elementos desbloqueados
+      Object.keys(elementosDesbloqueados).forEach((elemento) => {
+        const cantidad = elementosDesbloqueados[elemento];
+
+        switch (elemento) {
+          case 'Adán ollomol.png':
+            puntosIncrementados *= 2 * cantidad; // Duplica los puntos
+            break;
+          case 'Tomás playero.png':
+            // Duplica los puntos por un tiempo limitado (10 segundos)
+            puntosIncrementados *= 2 * cantidad;
+            setTimeout(() => {
+              puntosIncrementados = 1; // Restaura el incremento a su valor base
+            }, 10000);
+            break;
+          case 'Lucas empresaurio.png':
+            // Agrega una probabilidad del 50% de duplicar los puntos al clicar
+            if (Math.random() < 0.5) {
+              puntosIncrementados *= 2 * cantidad; // Duplica los puntos
+            }
+            break;
+          // Puedes agregar más casos según necesites para otros elementos desbloqueados
+        }
+      });
+
+      puntos += puntosIncrementados; // Incrementa la puntuación
+      actualizarPuntuacion();
+
+      // Actualiza la interfaz para mostrar la cantidad acumulada de elementos
+      Object.keys(elementosDesbloqueados).forEach((elemento) => {
+        mostrarElementoDesbloqueado(elemento, elementosDesbloqueados[elemento]);
+      });
+    }
+
+    // Función para actualizar la puntuación en la interfaz
+    function actualizarPuntuacion() {
+      const puntosElement = document.getElementById('puntos');
+      puntosElement.textContent = puntos;
+    }
+
+    // Evento para comprar una caja gacha
+    function comprarCajaGacha() {
+      if (puntos >= 100) {
+        puntos -= 100;
+        actualizarPuntuacion();
+
+        const nuevoElemento = obtenerElementoAleatorio();
+        elementosDesbloqueados[nuevoElemento] = (elementosDesbloqueados[nuevoElemento] || 0) + 1;
+        mostrarElementoDesbloqueado(nuevoElemento, elementosDesbloqueados[nuevoElemento]);
+      } else {
+        alert('No tienes suficientes puntos para comprar una caja gacha.');
+      }
+    }
+
+    // Función para obtener un elemento aleatorio de la carpeta "fotos"
+    function obtenerElementoAleatorio() {
+      // Simula la selección aleatoria de una imagen
+      const imagenes = ['Adán ollomol.png', 'Lucas empresaurio.png', 'Tomás playero.png'];
+      const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
+      return imagenes[indiceAleatorio];
+    }
+
+    // Función para mostrar un elemento desbloqueado en la interfaz
+    
+    function mostrarElementoDesbloqueado(elemento, cantidad) {
+      const elementosDesbloqueadosContainer = document.querySelector('.elementos-desbloqueados');
+
+      // Busca un contenedor existente para el elemento
+      const contenedorExistente = document.querySelector(`.collectible img[alt="${elemento}"]`);
+
+      if (contenedorExistente) {
+        // Actualiza la cantidad en el contenedor existente
+        const cantidadElemento = contenedorExistente.parentElement.querySelector('.cantidad');
+        cantidadElemento.textContent = cantidad;
+      } else {
+        // Crea un nuevo contenedor si no existe
+        const elementoHTML = document.createElement('div');
+        elementoHTML.classList.add('collectible');
+
+
+        // Crear la imagen
+        const imagen = document.createElement('img');
+        imagen.src = `fotos/${elemento}`;
+        imagen.alt = elemento;
+        
+
+        // Crear el nombre de la foto sin la extensión .png
+        const nombreFoto = document.createElement('p');
+        nombreFoto.textContent = elemento.replace('.png', ''); // Elimina la extensión .png
+
+        // Crear la cantidad
+        const cantidadElemento = document.createElement('p');
+        cantidadElemento.classList.add('cantidad');
+        cantidadElemento.textContent = cantidad;
+
+        // Agregar la imagen y el nombre al contenedor
+        elementoHTML.appendChild(imagen);
+        elementoHTML.appendChild(nombreFoto);
+        elementoHTML.appendChild(cantidadElemento);
+
+        // Agregar el elemento al contenedor de elementos desbloqueados
+        elementosDesbloqueadosContainer.appendChild(elementoHTML);
+        // Actualiza la descripción del item
+        const descripcion = document.getElementById('descripcion');
+        if (elemento=='Adán ollomol.png'){
+          descripcion.textContent = 'Adán ollomol.\nEs tan putero que hace que a partir de ahora ganes el doble de puntos por clicar la galleta.';
+        }if (elemento=='Lucas empresaurio.png'){
+          descripcion.textContent = 'Lucas empresaurio.\nEl cabrón es un ludópata y cuando clicas la galleta tienes una probabilidad del 50% de que te de el doble de puntos';
+        }if (elemento=='Tomás playero.png'){
+          descripcion.textContent = 'Tomás playero.\nVa a por las menores, ¡PERO SE ESCAPAN!, tienes 30 segundos donde se te duplica el numero de galletas que ganas';
+        }
+      }
+    }
+  </script>
+</body>
+</html>
