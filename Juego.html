@@ -66,6 +66,14 @@
               puntosIncrementados *= 2 * cantidad; // Duplica los puntos
             }
             break;
+          case 'Lucas bohemio.png':
+            //Suma una galleta por cada segundo que pase
+            puntosIncrementados += 1 * cantidad;
+            break;
+          case 'Sergio cachondo.png':
+            //Suma 5 puntos por cada clic
+            puntosIncrementados += 5 * cantidad;
+            break;
           // Puedes agregar más casos según necesites para otros elementos desbloqueados
         }
       });
@@ -111,7 +119,7 @@
     // Función para obtener un elemento aleatorio de la carpeta "fotos"
     function obtenerElementoAleatorio() {
       // Simula la selección aleatoria de una imagen
-      const imagenes = ['Adán ollomol.png', 'Lucas empresaurio.png', 'Tomás playero.png'];
+      const imagenes = ['Adán ollomol.png', 'Lucas empresaurio.png', 'Tomás playero.png', 'Lucas bohemio.png','Sergio cachondo.png'];
       const indiceAleatorio = Math.floor(Math.random() * imagenes.length);
       return imagenes[indiceAleatorio];
     }
@@ -164,7 +172,12 @@
           descripcion.textContent = 'Lucas empresaurio.\nEl cabrón es un ludópata y cuando clicas la galleta tienes una probabilidad del 50% de que te de el doble de puntos';
         }if (elemento=='Tomás playero.png'){
           descripcion.textContent = 'Tomás playero.\nVa a por las menores, ¡PERO SE ESCAPAN!, tienes 30 segundos donde se te duplica el numero de galletas que ganas';
+        }if (elemento=='Lucas bohemio.png'){
+          descripcion.textContent = 'Lucas bohemio.\nEs un hippie y no le gusta trabajar, por eso cada cada vez que clicas te da una galleta más';
+        }if (elemento=='Sergio cachondo.png'){
+          descripcion.textContent = 'Sergio cachondo.\nEstá como un puto tren, por eso cada vez que clicas la galleta te da 5 puntos';
         }
+          
       }
     }
   </script>
