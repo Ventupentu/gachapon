@@ -24,7 +24,7 @@
     </div>
   </div>
   <div class="gacha-section">
-    <h2>Cajas Gacha (Costo: 100 puntos)</h2>
+    <h2>Cajas Gacha (Costo: <span id="costoCaja">100</span>)</h2>
     <button id="comprar-caja" onclick="comprarCajaGacha()">Comprar Caja Gacha</button>
     <div class="elementos-desbloqueados">
       <!-- Aquí se mostrarán los elementos desbloqueados -->
@@ -37,8 +37,9 @@
 
   <script>
     // Variables para llevar el registro de la puntuación y los elementos desbloqueados
-    let puntos = 0;
+    let puntos = 100;
     let elementosDesbloqueados = {};
+    let costoCaja = 100;
 
     // Evento al hacer clic en la galleta
     function clicarGalleta() {
@@ -84,19 +85,28 @@
       puntosElement.textContent = puntos;
     }
 
+    // Función para actualizar el costo de la caja gacha en la interfaz
+    function actualizarCostoCaja() {
+      const costoCajaElement = document.getElementById('costoCaja');
+      costoCajaElement.textContent = costoCaja;
+    }
+
     // Evento para comprar una caja gacha
     function comprarCajaGacha() {
-      if (puntos >= 100) {
-        puntos -= 100;
-        actualizarPuntuacion();
+        if (puntos >= costoCaja) {
+          puntos -= costoCaja;
+          actualizarPuntuacion();
 
-        const nuevoElemento = obtenerElementoAleatorio();
-        elementosDesbloqueados[nuevoElemento] = (elementosDesbloqueados[nuevoElemento] || 0) + 1;
-        mostrarElementoDesbloqueado(nuevoElemento, elementosDesbloqueados[nuevoElemento]);
-      } else {
-        alert('No tienes suficientes puntos para comprar una caja gacha.');
+          const nuevoElemento = obtenerElementoAleatorio();
+          elementosDesbloqueados[nuevoElemento] = (elementosDesbloqueados[nuevoElemento] || 0) + 1;
+          mostrarElementoDesbloqueado(nuevoElemento, elementosDesbloqueados[nuevoElemento]);
+
+          costoCaja += 50; // Aumenta el costo de la caja en 50 puntos
+        } else {
+          alert('No tienes suficientes puntos para comprar una caja gacha.');
+        }
+        actualizarCostoCaja();
       }
-    }
 
     // Función para obtener un elemento aleatorio de la carpeta "fotos"
     function obtenerElementoAleatorio() {
