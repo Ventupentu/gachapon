@@ -41,9 +41,26 @@
     let elementosDesbloqueados = {};
     let costoCaja = 100;
 
+    //hacer que se pueda clicar la galleta pulsando la tecla espacio
+    
+    document.addEventListener('keydown', function(event) {
+      if (event.code == 'Space') {
+        //no sirve que se mantenga pulsada la tecla
+        clicarGalleta();
+      }
+    });
+
+    //hacer que se pueda comprar una caja gacha pulsando la tecla c
+    document.addEventListener('keydown', function(event) {
+      if (event.code == 'KeyC') {
+        comprarCajaGacha();
+      }
+    });
+
     // Evento al hacer clic en la galleta
     function clicarGalleta() {
       let puntosIncrementados = 1; // Incremento base de puntos
+     
 
       // Verifica los efectos de los elementos desbloqueados
       Object.keys(elementosDesbloqueados).forEach((elemento) => {
